@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        h1, h2 {
+            color: #fff;
+        }
+        .username {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ post.content }}</h1>
+        <p>Posted by, <span class='username'>{{ post.user.username }}</span></p>
+
+        <h2>Replies:</h2>
+        {% for reply in replies %}
+            <p>{{ reply.content }} <span class='username'> : Posted by, {{ reply.user.username }}</span></p>
+        {% endfor %}
+
+        <form method="POST" action="{{ url_for('reply_post', post_id=post.id) }}">
+            <textarea name="content" placeholder="New reply" required></textarea>
+            <button type="submit">Reply</button>
+        </form>
+    </div>
+</body>
+</html>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background-color: #222;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(255,255,255,0.1);
+        }
+        .post {
+            border-bottom: 1px solid #444;
+            padding: 10px 0;
+        }
+        p {
+            color: white;  /* Change the color of the text */
+        }
+        a {
+            color: green;  /* Change the color of the links */
+        }
+        .post span {
+            color: gray;  /* Change the color of the username */
+        }
+        textarea {
+            width: 80%;  /* Change the width of the textarea */
+            height: 160px;  /* Change the height of the textarea */
+        }
+    </style>
+</head>
+<script>
+    function showReplyBox(postElement) {
+        var replyBox = postElement.querySelector('.reply-box');
+        replyBox.style.display = 'block';
+    }
+    </script>
+    </body>
+<body>
+    <div class="container">
+        <h1>Welcome to the Board!</h1>
+
+        {% if session['username'] %}
+            <p>Welcome, {{ session['username'] }}! <a href="{{ url_for('logout') }}">Logout</a></p>
+            <form method="POST">
+                <textarea name="content" placeholder="New post" required></textarea>
+                <button type="submit">Post</button>
+            </form>
+        {% else %}
+            <p><a href="{{ url_for('login') }}">Login</a> or <a href="{{ url_for('register') }}">Register</a></p>
+        {% endif %}
+
+        <h2>Posts:</h2>
+        {% for post in posts %}
+            <div class="post">
+                <a href="{{ url_for('view_post', post_id=post.id) }}">
+                    <p>{{ post.content }} <span class='username'> : Posted by, {{ post.user.username }}</span></p>
+                </a>
+                <div class="replies">
+                    {% for reply in post.replies %}
+                        <p>{{ reply.content }} <span class='username'> : Posted by, {{ reply.user.username }}</span></p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

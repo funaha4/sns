@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background-color: #222;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(255,255,255,0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, button {
+            margin-bottom: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            width: 10%;
+            border-radius: 20px;
+        }
+        button {
+            margin-bottom: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            width: 60px;
+            border-radius: 20px;  /* Make the corners of the button round */
+        }
+        h1 {
+            color: white;  /* Change the color of the Login text */
+        }
+        a {
+            color: green;  /* Change the color of the links */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
+    </div>
+</body>
+</html>
